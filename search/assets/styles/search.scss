@@ -13,8 +13,154 @@
     }
 }
 
+.searchWrapper {
+    margin: 0 auto;
+    padding: 40px 0px;
+    width: 80%;
+    position: relative;
+}
+
+input[type=search] { 	
+    padding: 10px 10px 10px 45px;
+    background: url('../../../dist/build/images/search.svg') no-repeat;
+    background-position: 15px 50%;
+    background-size: 18px;
+    font-size: $base-font-size;
+    border-radius: 5px;
+    color: $main-color;
+	border: none;
+	background-color: rgba(255, 255, 255, 0.4);
+    line-height: 2;
+    min-width: 200px;
+    width: 100%;
+
+    &::-webkit-input-placeholder {
+        color: $main-color;
+        opacity: 0.7;
+    }
+    &:-moz-placeholder {
+       color: $main-color;
+       opacity: 0.7;
+    }
+
+    &:focus {
+        background-color: rgba(255, 255, 255, 0.6);
+    }
+}
+
+.searchSuggestions {
+    background-color: #0C2951;
+    display: none;
+    border-radius: 5px;
+    text-align: left;
+    max-height: 300px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    overflow: hidden;
+
+    &.visible {
+        display: block;
+    }
+}
+
+.searchSuggestion {
+    padding: 10px 15px;
+
+    &:hover,
+    &:focus {
+        cursor: pointer;
+    }
+
+    &.active {
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 5px;
+    }
+}
+
+.previousSearchesWrapper {
+    background-color: rgba(255, 255, 255, 0.1);
+    z-index: 0;
+}
+
+.previousSearches {
+    display: none;
+
+    &.visible {
+        display: block;
+    }
+}
+
+.previousSearch {
+    position: relative;
+
+    .removeSearch {
+        display: none;
+    }
+
+    &:hover,
+    &:focus {
+        background-color: rgba(255, 255, 255, 0.2);
+
+        .removeSearch {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 50px;
+            height: 100%;
+            background: #723D53;
+            float: right;
+            content: ' ';
+    
+            &:hover,
+            &:focus {
+                cursor: pointer;
+            }
+    
+            .removeCircle {
+                margin: 0 auto;
+                border-radius: 50%;
+                background-color: $main-color;
+                color: lightgray;
+                line-height: 1;
+                height: 18px;
+                width: 18px;
+            }
+        }
+    }
+
+    .previousSearchTerm {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+        width: 80%;
+    }
+}
+
 @media screen and (max-width: $small) {
     .searchHeading {
         height: 40px;
+    }
+
+    .searchWrapper {
+        width: 85%;
+    }
+
+    input[type=search] { 	
+        padding: 10px 10px 10px 35px;
+        background-position: 10px 50%;
+    }
+
+    .previousSearch {
+        .previousSearchTerm {    
+            p:last-of-type {
+                margin-right: 40px;
+            }
+        }
     }
 }

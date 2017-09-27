@@ -2,6 +2,8 @@
 
 html {
     height: 100%;
+    margin: 0px;
+    width: 100%;
 }
 
 body {
@@ -13,9 +15,12 @@ body {
     font-family: $base-font-family;
     height: 100%;
     line-height: $base-line-height;
+    margin: 0px;
+    width: 100%;
 }
 
 .container {
-    padding: 50px;
+    padding: 50px 0px;
     text-align: center;
+    width: 100%;
 }

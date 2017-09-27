@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
 	<title>Search app</title>
     <link rel="stylesheet" href="dist/build/styles/style.css">
     <link rel="icon" type="image/png" href="dist/build/images/search.png" />
@@ -11,9 +12,19 @@
         <div class="searchHeading">
             <img src="dist/build/images/logo.svg" alt="search logo">
         </div>
+        
+        <div class="searchWrapper">
+            <input id="searchField" type="search" placeholder="Search for something..." autocomplete="off"/>
+            <div class="searchSuggestions"></div>
+        </div>
+
+        <div class="previousSearchesWrapper">
+            <div class="previousSearches"></div>
+        </div>
     </div>
     
-	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/moment/min/moment.min.js"></script>
 	<script src="dist/build/scripts/main.min.js"></script>
 </body>
 </html>
