@@ -1,43 +1,26 @@
 @import 'variables';
 
-.searchHeading {
-    height: 70px;
-    margin-left: auto;
-    margin-right: auto;
-    width: auto;
-
-    img {
-        height: 100%;
-        max-height: 70px;
-        width: auto;
-    }
-}
-
-.searchWrapper {
-    margin: 0 auto;
-    padding: 40px 0px;
-    width: 80%;
-    position: relative;
-}
-
 input[type=search] { 	
-    padding: 10px 10px 10px 45px;
-    background: url('../../../dist/build/images/search.svg') no-repeat;
+    -webkit-appearance: none;
+    background-color: rgba(255, 255, 255, 0.4);
+    background-image: url('../../../dist/build/images/search.svg');
     background-position: 15px 50%;
+    background-repeat: no-repeat;
     background-size: 18px;
-    font-size: $base-font-size;
+    border: none;
     border-radius: 5px;
     color: $main-color;
-	border: none;
-	background-color: rgba(255, 255, 255, 0.4);
+    font-size: $base-font-size;
     line-height: 2;
     min-width: 200px;
+    padding: 10px 10px 10px 45px;
     width: 100%;
 
     &::-webkit-input-placeholder {
         color: $main-color;
         opacity: 0.7;
     }
+    
     &:-moz-placeholder {
        color: $main-color;
        opacity: 0.7;
@@ -48,20 +31,80 @@ input[type=search] {
     }
 }
 
-.searchSuggestions {
-    background-color: #0C2951;
+.previousSearch {
+    position: relative;
+
+    .removeSearch {
+        display: none;
+    }
+
+    &:hover,
+    &:focus {
+        background-color: rgba(255, 255, 255, 0.2);
+
+        .removeSearch {
+            display: flex;
+        }
+    }
+}
+
+.previousSearches {
     display: none;
-    border-radius: 5px;
-    text-align: left;
-    max-height: 300px;
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    overflow: hidden;
 
     &.visible {
         display: block;
+    }
+}
+
+.previousSearchTerm {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 80%;
+}
+
+.previousSearchesWrapper {
+    background-color: rgba(255, 255, 255, 0.1);
+    z-index: 0;
+}
+
+.removeSearch {
+    background: #723D53;
+    bottom: 0;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+    
+    &:hover,
+    &:focus {
+        cursor: pointer;
+    }
+
+    .removeCircle {
+        background-color: $main-color;
+        border-radius: 50%;
+        color: lightgray;
+        height: 18px;
+        line-height: 1;
+        margin: 0 auto;
+        width: 18px;
+    }
+}
+
+.searchHeading {
+    height: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+
+    img {
+        height: 100%;
+        max-height: 70px;
+        width: auto;
     }
 }
 
@@ -79,88 +122,47 @@ input[type=search] {
     }
 }
 
-.previousSearchesWrapper {
-    background-color: rgba(255, 255, 255, 0.1);
-    z-index: 0;
-}
-
-.previousSearches {
+.searchSuggestions {
+    background-color: #0C2951;
+    border-radius: 5px;
     display: none;
-
+    left: 0;
+    max-height: 300px;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    text-align: left;
+    z-index: 1;
+    
     &.visible {
         display: block;
     }
 }
 
-.previousSearch {
+.searchWrapper {
+    margin: 0 auto;
+    padding: 40px 0px;
     position: relative;
-
-    .removeSearch {
-        display: none;
-    }
-
-    &:hover,
-    &:focus {
-        background-color: rgba(255, 255, 255, 0.2);
-
-        .removeSearch {
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 50px;
-            height: 100%;
-            background: #723D53;
-            float: right;
-            content: ' ';
-    
-            &:hover,
-            &:focus {
-                cursor: pointer;
-            }
-    
-            .removeCircle {
-                margin: 0 auto;
-                border-radius: 50%;
-                background-color: $main-color;
-                color: lightgray;
-                line-height: 1;
-                height: 18px;
-                width: 18px;
-            }
-        }
-    }
-
-    .previousSearchTerm {
-        display: flex;
-        justify-content: space-between;
-        margin: 0 auto;
-        width: 80%;
-    }
+    width: 80%;
 }
 
 @media screen and (max-width: $small) {
+    input[type=search] { 	
+        background-position: 10px 50%;
+        padding: 10px 10px 10px 35px;
+    }
+    
+    .previousSearchTerm {    
+        p:last-of-type {
+            margin-right: 40px;
+        }
+    }
+
     .searchHeading {
         height: 40px;
     }
 
     .searchWrapper {
         width: 85%;
-    }
-
-    input[type=search] { 	
-        padding: 10px 10px 10px 35px;
-        background-position: 10px 50%;
-    }
-
-    .previousSearch {
-        .previousSearchTerm {    
-            p:last-of-type {
-                margin-right: 40px;
-            }
-        }
     }
 }
