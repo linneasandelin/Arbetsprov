@@ -16,17 +16,20 @@ function fetchData() {
 	});
 }
 
+// compare input to searchable data and return matches
 function filterMatchingResults(input, data) {
 	return data.filter(function(word) {
 		return word.toLowerCase().includes(input.value.toLowerCase());
 	})
 }
 
+// genereate search suggestions to show
 function generateSuggestions(matches) {
 	return matches.map(function(match) {return '<div class="searchSuggestion">' + match + '</div>'});
 }
 
-function getResults(event, input, data) {
+// get correct search suggestions and show these
+function getResults(input, data) {
 	var matches = filterMatchingResults(input, data);
 	var suggestions = generateSuggestions(matches);
 
@@ -40,6 +43,7 @@ function getResults(event, input, data) {
     }
 }
 
+// add search term chosen to previous searches
 function addSearchTerm(term) {
 	if(term.length > 0) {
 		$('.previousSearches').addClass('visible');
@@ -51,12 +55,14 @@ function addSearchTerm(term) {
 	resetSearchField();
 }
 
+// clear input and reset search
 function resetSearchField() {
 	$('#searchField').val('');
 	$('.searchSuggestions').html('');
 	$('.searchSuggestions').removeClass('visible');
 }
 
+// remove search term from previous searches
 function removeSearchTerm(search) {
 	$(search).remove();
 }
@@ -64,11 +70,14 @@ function removeSearchTerm(search) {
 $(document).ready(function() {
 	fetchData()
 		.then(function(searchData) {
+			// show correct search suggestions on input change
 			$('#searchField').on('input', function(event) {
-				getResults(event, this, searchData)
+				getResults(this, searchData)
 			});
 			
+			// listen to keys down / up / enter and set active class on search suggestions / save to previous searches
 			$('#searchField').on('keydown', function(event) {
+				// arrow down
 				if(event.keyCode === 40) {
 					var currentSuggestions = $('.searchSuggestions').children('.searchSuggestion');
 					var activeIndex = $('.active').index('.searchSuggestion');
@@ -79,6 +88,7 @@ $(document).ready(function() {
 						$(currentSuggestions[activeIndex]).removeClass('active');
 						$(currentSuggestions[activeIndex + 1]).addClass('active');
 					}
+				// arrow up
 				} else if(event.keyCode === 38) {
 					var currentSuggestions = $('.searchSuggestions').children('.searchSuggestion');
 					var activeIndex = $('.active').index('.searchSuggestion');
@@ -87,24 +97,27 @@ $(document).ready(function() {
 						$(currentSuggestions[activeIndex]).removeClass('active');
 						$(currentSuggestions[activeIndex - 1]).addClass('active');
 					}
+				// enter
 				} else if(event.keyCode === 13) {
 					var currentSuggestions = $('.searchSuggestions').children('.searchSuggestion');
 					var activeIndex = $('.active').index('.searchSuggestion');
-
 					addSearchTerm($(currentSuggestions[activeIndex]).text());
 				}
 			});
 
+			// set active class when hovering over search suggestion
 			$('.searchSuggestions').on('mouseenter', '.searchSuggestion', function(event) {
 				$('.searchSuggestion').removeClass('active');
 				$(this).addClass('active');
 			});
 
+			// save suggestion to previous searches on click
 			$('.searchSuggestions').on('click', '.searchSuggestion', function(event) {
 				addSearchTerm($(this).text());
 				resetSearchField();
 			})
 
+			// remove search from previous searches on click
 			$('.previousSearches').on('click', '.removeSearch', function(event) {
 				removeSearchTerm($(this).closest('.previousSearch'));
 			});
